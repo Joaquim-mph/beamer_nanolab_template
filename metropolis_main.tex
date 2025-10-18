@@ -1,0 +1,110 @@
+\documentclass[aspectratio=169]{beamer}
+
+% ---------- THEMING ----------
+\usetheme[numbering=fraction]{metropolis}
+\metroset{block=fill}
+\setbeamertemplate{caption}[numbered]
+
+% ---------- LANGUAGE & FONTS ----------
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% ---------- MATH & FIGURES ----------
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\setlist[enumerate]{itemsep=1.5em}
+\graphicspath{{./figures/}}
+
+
+
+% Define custom title page template
+\setbeamertemplate{title page}{
+	\begin{tikzpicture}[remember picture,overlay]
+		% --- FCFM logo (top left) ---
+		\node[anchor=north west, xshift=10pt, yshift=-10pt] at (current page.north west) {
+			\includegraphics[height=2cm]{fcfm_escudo_color_png.png}
+		};
+		
+		% --- Nanolab logo (bottom right) ---
+		\node[anchor=south east, xshift=-10pt, yshift=10pt] at (current page.south east) {
+			\includegraphics[height=2.75cm]{logo_nanolab.png}
+		};
+	\end{tikzpicture}
+	\vspace{1.75em}
+	% --- Title page content ---
+	\vfill
+	\centering
+	{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+	\vspace{0.6em}
+	{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+	\vspace{1.4em}
+	{\usebeamerfont{author}\insertauthor\par}
+	\vspace{1em}
+	{\usebeamerfont{date}\insertdate\par}
+	\vfill
+}
+
+
+% --- Config: file name + size + position ---
+\newcommand{\pagenumbadgefile}{foot_logo.png}
+\newcommand{\pagenumbadgeheight}{10mm}
+\newcommand{\pagenumbadgexshift}{-0.5mm}   % badge position from right edge
+\newcommand{\pagenumbadgeyshift}{1.5mm}    % badge position from bottom edge
+\newcommand{\pagenumxshift}{3.33mm}         % fine nudge for text over image
+\newcommand{\pagenumyshift}{-1.5mm}
+\newcommand{\pagenumtextcolor}{black}    
+
+% --- Draw the badge with ONLY the current frame number ---
+\newcommand{\pagenumbadge}{%
+	\begin{tikzpicture}[remember picture,overlay]
+		\node[anchor=south east,
+		xshift=\pagenumbadgexshift,
+		yshift=\pagenumbadgeyshift] at (current page.south east) {%
+			\begin{tikzpicture}
+				% The image node (set inner/outer sep=0 for accurate centering)
+				\node[inner sep=0pt, outer sep=0pt] (img)
+				{\includegraphics[height=\pagenumbadgeheight]{\pagenumbadgefile}};
+				% Centered page number on top of image
+				\node[font=\bfseries\tiny, text=\pagenumtextcolor]
+				at ([xshift=\pagenumxshift,yshift=\pagenumyshift]img.center)
+				{\insertframenumber};
+				% If you want a soft background behind the number for contrast:
+				% \node at (img.center) [circle, fill=white, opacity=0.65,
+				%                        minimum size=8mm, inner sep=0pt] {};
+				% \node[font=\bfseries\small, text=black] at (img.center) {\insertframenumber};
+				%
+				% Or use outlined text (requires \usepackage{contour}):
+				% \node at (img.center) {\contour{white}{\bfseries\small \insertframenumber}};
+			\end{tikzpicture}
+		};
+	\end{tikzpicture}%
+}
+
+% Replace footline with the badge
+\setbeamertemplate{footline}{\pagenumbadge}
+\setbeamertemplate{navigation symbols}{}
+
+% ---------- META ----------
+\title{Optical-Programmable Ferroelectric Switching in SnS Memristors}
+\subtitle{Fancy subtitle}
+\author{Joaquín Antonio López Cortés\\Advisor: Diana Dulić}
+\institute{Universidad de Chile\\Departamento de Ingeniería Eléctrica}
+\date{\today}
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+
+
+\end{document}
